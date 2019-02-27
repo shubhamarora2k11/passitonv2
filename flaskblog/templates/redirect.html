@@ -44,7 +44,9 @@
 				</fieldset>
 				<div class="form-group">
 					{{ form.submit(class="btn btn-outline-info") }}	
-					{{ form.submit2(class="btn btn-outline-info") }}			
+					{% if current_user.designation == 'M' or current_user.designation == 'L' or current_user.designation == 'SSE'%}
+					{{ form.submit2(class="btn btn-outline-info") }}	
+					{% endif %}		
 				</div>
     		</form>
 			

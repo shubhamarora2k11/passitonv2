@@ -90,11 +90,11 @@ def account():
         form.designation.data = current_user.designation
         form.team.data = current_user.team
     
-    eligible = User.query.filter(User.balance<1000).filter(User.balance>0).order_by(desc(User.earned))  
+    #eligible = User.query.filter(User.balance<1000).filter(User.balance>0).order_by(desc(User.earned))  
     image_file = url_for('static', filename='profile_pics/'+ current_user.image_file )
     counts = User.query.order_by(desc(User.earned)).limit(5)
     return render_template('account.html', title='Account', image_file=image_file, 
-                           form=form, counts=counts, eligible=eligible )
+                           form=form, counts=counts )
 
 
 @users.route('/user/<string:username>')

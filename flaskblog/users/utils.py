@@ -22,11 +22,20 @@ def save_picture(form_picture):
     
 def send_reset_email(user):
     token = user.get_reset_token()
-    msg = Message( 'Password Reset Request', sender='noreply@myblog.com', recipients=[user.email] )
+    msg = Message( 'Password Reset Request', sender='noreply@cerner.com', recipients=[user.email] )
     msg.body = f'''To reset your password, visit the following link:
         
 {url_for('users.reset_token', token=token, _external=True)}
 
 If you did not make this request then simply ignore this mail and no changes will be reflected.
+'''
+    mail.send(msg)
+    
+def send_reward_email(user, giver):
+    msg = Message( 'Congrats! Reward Recieved', sender='noreply@cerner.com', recipients=[user.email] )
+    msg.body = f'''You have recieved appreciation/reward. Please visit the below link for details:
+
+{url_for('rewards.dashboard', _external=True)}
+
 '''
     mail.send(msg)

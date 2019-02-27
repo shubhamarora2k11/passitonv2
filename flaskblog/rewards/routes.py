@@ -8,6 +8,7 @@ from flaskblog.models import Reward, User, Post
 from flaskblog.rewards.forms import RewardForm, DashboardForm, SearchAssociateForm,RedirectForm
 
 rewards = Blueprint('rewards', __name__ )
+from flaskblog.users.utils import send_reward_email
 
 from sqlalchemy import desc
 
@@ -29,6 +30,8 @@ def new_reward():
         post = Post(title=title, content=content, author=associate, from_user=from_user)
         db.session.add(post)
         db.session.commit()
+        
+        send_reward_email(associate, current_user)
         
         flash(f'Your reward has been shared successfully!', 'success')
         return redirect(url_for('main.home'))
@@ -118,11 +121,16 @@ def history():
    page = request.args.get('page', 1, type=int)
    posts = Reward.query.filter(Reward.associate_id == current_user.email).order_by(desc(Reward.date_of_reward)).paginate(page=page, per_page=5)
    counts = User.query.filter(User.earned>0).order_by(desc(User.earned)).limit(5)
-   eligible = User.query.filter(User.balance<1000).filter(User.balance>0).order_by(desc(User.earned))
    #print(counts.all(), eligible.all())
    print(current_user)
    print(posts.items)
-   
+   eligible = current_user.rewards
+   templist=[]
+   for reward in eligible:
+       temp =  User.query.filter(User.email==reward.associate_id).first()
+       templist.append(temp)
+       
+   eligible = templist
    if current_user.designation == 'M' or current_user.designation == 'L' or current_user.designation == 'SSE':
        return render_template('history.html', posts=posts, counts=counts, eligible = eligible )
    else:
