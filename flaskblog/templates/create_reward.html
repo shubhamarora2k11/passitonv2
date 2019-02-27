@@ -1,0 +1,92 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="content-section">
+			<form method="POST" action="">
+				{{ form.hidden_tag() }}
+				<fieldset class="form-group">
+					<legend class="border-bottom mb-4">{{ legend }}</legend>
+					<div class="form-group">
+					
+						{{ form.associate_id.label(class="form-control-label") }}
+						
+						{% if form.associate_id.errors %}
+							{{ form.associate_id(class="form-control form-control-lg is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.associate_id.errors %}
+									<span> {{ error }} </span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.associate_id(class="form-control form-control-lg") }}
+						{% endif %}
+						
+					</div>
+					<div class="form-group">
+						{{ form.category.label(class="form-control-label") }}
+						
+						{% if form.category.errors %}
+							{{ form.category(class="form-control form-control-lg is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.category.errors %}
+									<span> {{ error }} </span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.category(class="form-control form-control-lg") }}
+						{% endif %}
+						
+					</div>
+					<div class="form-group">
+						{{ form.balance.label(class="form-control-label") }}
+						
+						{% if form.balance.errors %}
+							{{ form.balance(class="form-control form-control-lg is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.balance.errors %}
+									<span> {{ error }} </span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.balance(class="form-control form-control-lg") }}
+						{% endif %}
+						
+					</div>
+					<div class="form-group">
+						{{ form.reward_points.label(class="form-control-label") }}
+						
+						{% if form.reward_points.errors %}
+							{{ form.reward_points(class="form-control form-control-lg is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.reward_points.errors %}
+									<span> {{ error }} </span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.reward_points(class="form-control form-control-lg") }}
+						{% endif %}
+						
+					</div>
+					<div class="form-group">
+						{{ form.reward_comments.label(class="form-control-label") }}
+						
+						{% if form.reward_comments.errors %}
+							{{ form.reward_comments(class="form-control form-control-lg is-invalid") }}
+							<div class="invalid-feedback">
+								{% for error in form.reward_comments.errors %}
+									<span> {{ error }} </span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.reward_comments(class="form-control form-control-lg") }}
+						{% endif %}
+						
+					</div>
+				</fieldset>
+				<div class="form-group">
+					{{ form.submit(class="btn btn-outline-info") }}				
+				</div>
+    		</form>
+			
+	</div>
+{% endblock content%}
+
