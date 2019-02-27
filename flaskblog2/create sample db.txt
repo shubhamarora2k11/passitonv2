@@ -1,0 +1,34 @@
+from flaskblog.test_db import User, Reward, Post, bcrypt, db
+
+db.drop_all()
+db.create_all()
+
+ 
+bcrypt.generate_password_hash('test').decode('utf-8')
+
+a1 = User(username='RevAdmin', email='revadmin@cerner.com', password=bcrypt.generate_password_hash('test').decode('utf-8'), designation='M', team='RevWorks', balance=1000)
+
+a2 = User(username='ITAdmin', email='itadmin@cerner.com', password=bcrypt.generate_password_hash('test').decode('utf-8'), designation='M', team='ITWorks', balance=1000)
+
+
+u1 = User(username='RevUser', email='revuser@cerner.com', password=bcrypt.generate_password_hash('test').decode('utf-8'), designation='L', team='RevWorks', balance=0)
+
+u2 = User(username='RevUser2', email='revuser2@cerner.com', password=bcrypt.generate_password_hash('test').decode('utf-8'), designation='SE', team='RevWorks', balance=0)
+
+u3 = User(username='ITUser', email='ituser@cerner.com', password=bcrypt.generate_password_hash('test').decode('utf-8'), designation='SSE', team='ITWorks', balance=0)
+
+u4 = User(username='ITUser2', email='ituser2@cerner.com', password=bcrypt.generate_password_hash('test').decode('utf-8'), designation='SE', team='ITWorks', balance=0)
+
+
+db.session.add(a1)
+db.session.add(a2)
+db.session.add(u2)
+db.session.add(u1)
+db.session.add(u3)
+db.session.add(u4)
+
+db.session.commit()
+
+
+Reward.query.filter(Reward.giver == a2).all()
+Reward.query.filter(Reward.giver==a2).order_by(desc(Reward.date_of_reward)).first()

@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="content-section">
+			<form name="form1" method="POST" action="">
+				{{ form.hidden_tag() }}
+				<fieldset class="form-group">
+					<legend class="border-bottom mb-4">{{ legend }}</legend>
+    					
+    					<div class="form-group">
+    						{{ form.earned.label(class="form-control-label") }}
+    						
+    						{% if form.earned.errors %}
+    							{{ form.earned(class="form-control form-control-lg is-invalid") }}
+    							<div class="invalid-feedback">
+    								{% for error in form.earned.errors %}
+    									<span> {{ error }} </span>
+    								{% endfor %}
+    							</div>
+    						{% else %}
+    							{{ form.earned(class="form-control form-control-lg") }}
+    						{% endif %}
+    						
+    					</div>
+    					
+				</fieldset>
+				<div class="form-group">
+					{{ form.submit(class="btn btn-outline-info") }}
+				</div>
+    		</form>		
+	</div>
+	
+    <div class="content-section">
+			<form name="form2" method="POST" action="">
+				{{ form.hidden_tag() }}
+				<fieldset class="form-group">
+					<legend class="border-bottom mb-4">{{ legend2 }}</legend>
+    					
+    					<div class="form-group">
+    						{{ form.balance.label(class="form-control-label") }}
+    						
+    						{% if form.balance.errors %}
+    							{{ form.balance(class="form-control form-control-lg is-invalid") }}
+    							<div class="invalid-feedback">
+    								{% for error in form.balance.errors %}
+    									<span> {{ error }} </span>
+    								{% endfor %}
+    							</div>
+    						{% else %}
+    							{{ form.balance(class="form-control form-control-lg") }}
+    						{% endif %}
+    						
+    					</div>
+    					
+				</fieldset>
+				<div class="form-group">
+					{{ form.submit2(class="btn btn-outline-info") }}
+				</div>
+    		</form>		
+	</div>
+
+{% endblock content%}
